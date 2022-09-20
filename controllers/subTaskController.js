@@ -8,6 +8,11 @@ const { checkPermissionForSubTask } = require("../utils");
 const createSubTask = async (req, res) => {
   const { title, description, member: memberId, project: projectID } = req.body;
   req.body.createdBy = req.user.userId;
+  if (!memberId) {
+    throw new CustomError.BadRequestError(
+      `Please Provide Member for Project.`
+    );
+  }
   const project = await Project.findOne({ _id: projectID });
   const projectMember = project.members;
   const projectMemberIdArray = projectMember.map((member) => {
