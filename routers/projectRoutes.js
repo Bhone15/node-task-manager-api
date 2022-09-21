@@ -17,7 +17,7 @@ const {
 
 router
   .route("/")
-  .get(authenticateUser, authroizePermissions("admin"), getAllProject)
+  .get(authenticateUser, getAllProject)
   .post(authenticateUser, authroizePermissions("admin"), creatProject);
 router
   .route("/:id")
